@@ -1,6 +1,6 @@
 extends KinematicBody2D
 var motion = Vector2()
-var speed = 100000
+var speed = 25000
 var move = true
 func _physics_process(delta):
 	if Input.is_action_pressed("ui_down") and move == false:
