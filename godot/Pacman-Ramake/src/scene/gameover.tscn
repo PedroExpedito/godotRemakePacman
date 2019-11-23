@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/texture/gameover.png" type="Texture" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Button
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+
+
+func _on_Button_pressed():
+	get_tree().change_scene(\"res://src/scene/main.tscn\")
+	pass # Replace with function body.
+"
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+centered = false
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 318.213, 156.469 )
+current = true
+
+[node name="Button" type="Button" parent="."]
+margin_left = 256.031
+margin_top = 257.45
+margin_right = 333.031
+margin_bottom = 277.45
+rect_scale = Vector2( 1.7335, 1.9275 )
+text = "Play Again"
+script = SubResource( 1 )
+[connection signal="pressed" from="Button" to="Button" method="_on_Button_pressed"]
