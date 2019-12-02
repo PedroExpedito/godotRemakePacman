@@ -1,270 +1,161 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://src/scripts/pacman_player.gd" type="Script" id=1]
-[ext_resource path="res://src/texture/pacman.png" type="Texture" id=2]
-[ext_resource path="res://src/tres/cenario1.tres" type="TileSet" id=3]
-[ext_resource path="res://src/texture/background.png" type="Texture" id=4]
-[ext_resource path="res://src/scripts/orange.gd" type="Script" id=5]
-[ext_resource path="res://src/texture/orange.png" type="Texture" id=6]
-[ext_resource path="res://src/texture/red.png" type="Texture" id=7]
-[ext_resource path="res://src/scene/coin.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/tres/cenario.tres" type="TileSet" id=1]
+[ext_resource path="res://src/scripts/hud.gd" type="Script" id=2]
+[ext_resource path="res://src/texture/backgroundblack.png" type="Texture" id=3]
+[ext_resource path="res://src/scripts/spawnenemy.gd" type="Script" id=4]
+[ext_resource path="res://src/scripts/giantcoin.gd" type="Script" id=5]
+[ext_resource path="res://src/texture/coin.png" type="Texture" id=6]
+[ext_resource path="res://src/scripts/spawnplayer.gd" type="Script" id=7]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 14.9702
-
-[sub_resource type="Animation" id=2]
-length = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("sprite:region_rect")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Rect2( 0, 0, 40, 40 ) ]
-}
-
-[sub_resource type="CircleShape2D" id=3]
-radius = 15.5197
-
-[sub_resource type="CircleShape2D" id=4]
-radius = 16.5391
-
-[sub_resource type="RayShape2D" id=5]
-length = 58.778
-
-[sub_resource type="GDScript" id=6]
-script/source = "extends Label
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = \"text\"
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-func _physics_process(delta):
-	self.set_text(str(game.game_score))
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-"
+radius = 5.51962
 
 [node name="main" type="Node2D"]
 
-[node name="pacman_player" type="KinematicBody2D" parent="."]
-editor/display_folded = true
-position = Vector2( 418.049, 182.372 )
-scale = Vector2( 0.6, 0.6 )
-script = ExtResource( 1 )
-
-[node name="shape" type="CollisionShape2D" parent="pacman_player"]
-shape = SubResource( 1 )
-
-[node name="sprite" type="Sprite" parent="pacman_player"]
-position = Vector2( 2.68225, 3.15558 )
-texture = ExtResource( 2 )
-region_enabled = true
-region_rect = Rect2( 0, 0, 40, 40 )
-
-[node name="anim" type="AnimationPlayer" parent="pacman_player"]
-anims/idle = SubResource( 2 )
-
 [node name="TileMap" type="TileMap" parent="."]
 scale = Vector2( 0.303, 0.303 )
-tile_set = ExtResource( 3 )
+tile_set = ExtResource( 1 )
 format = 1
-tile_data = PoolIntArray( 0, 2, 0, 1, 2, 0, 2, 2, 0, 3, 2, 0, 4, 2, 0, 5, 2, 0, 6, 2, 0, 7, 2, 0, 8, 2, 0, 9, 2, 0, 10, 2, 0, 11, 2, 0, 12, 2, 0, 13, 2, 0, 14, 2, 0, 15, 2, 0, 16, 2, 0, 17, 2, 0, 18, 2, 0, 19, 2, 0, 20, 2, 0, 21, 2, 0, 22, 2, 0, 23, 2, 0, 24, 2, 0, 25, 2, 0, 26, 2, 0, 27, 2, 0, 28, 2, 0, 29, 2, 0, 30, 2, 0, 31, 2, 0, 32, 2, 0, 65536, 2, 0, 65568, 2, 0, 131072, 2, 0, 131074, 2, 0, 131075, 2, 0, 131076, 2, 0, 131077, 2, 0, 131078, 2, 0, 131079, 2, 0, 131080, 2, 0, 131081, 2, 0, 131082, 2, 0, 131083, 2, 0, 131084, 2, 0, 131085, 2, 0, 131086, 2, 0, 131087, 2, 0, 131088, 2, 0, 131089, 2, 0, 131090, 2, 0, 131091, 2, 0, 131092, 2, 0, 131093, 2, 0, 131094, 2, 0, 131095, 2, 0, 131096, 2, 0, 131097, 2, 0, 131098, 2, 0, 131099, 2, 0, 131100, 2, 0, 131101, 2, 0, 131102, 2, 0, 131104, 2, 0, 196608, 2, 0, 196640, 2, 0, 262144, 2, 0, 262148, 2, 0, 262149, 2, 0, 262150, 2, 0, 262155, 2, 0, 262156, 2, 0, 262157, 2, 0, 262158, 2, 0, 262159, 2, 0, 262160, 2, 0, 262161, 2, 0, 262162, 2, 0, 262163, 2, 0, 262164, 2, 0, 262165, 2, 0, 262170, 2, 0, 262171, 2, 0, 262172, 2, 0, 262176, 2, 0, 327680, 2, 0, 327684, 2, 0, 327708, 2, 0, 327712, 2, 0, 393216, 2, 0, 393218, 2, 0, 393220, 2, 0, 393222, 2, 0, 393223, 2, 0, 393224, 2, 0, 393225, 2, 0, 393226, 2, 0, 393227, 2, 0, 393231, 2, 0, 393232, 2, 0, 393233, 2, 0, 393237, 2, 0, 393238, 2, 0, 393239, 2, 0, 393240, 2, 0, 393241, 2, 0, 393242, 2, 0, 393244, 2, 0, 393246, 2, 0, 393248, 2, 0, 458752, 2, 0, 458754, 2, 0, 458758, 2, 0, 458778, 2, 0, 458782, 2, 0, 458784, 2, 0, 524288, 2, 0, 524290, 2, 0, 524294, 2, 0, 524314, 2, 0, 524318, 2, 0, 524320, 2, 0, 589824, 2, 0, 589826, 2, 0, 589828, 2, 0, 589830, 2, 0, 589831, 2, 0, 589832, 2, 0, 589833, 2, 0, 589834, 2, 0, 589835, 2, 0, 589839, 2, 0, 589840, 2, 0, 589841, 2, 0, 589845, 2, 0, 589846, 2, 0, 589847, 2, 0, 589848, 2, 0, 589849, 2, 0, 589850, 2, 0, 589852, 2, 0, 589854, 2, 0, 589856, 2, 0, 655360, 2, 0, 655364, 2, 0, 655388, 2, 0, 655392, 2, 0, 720896, 2, 0, 720900, 2, 0, 720901, 2, 0, 720902, 2, 0, 720907, 2, 0, 720908, 2, 0, 720909, 2, 0, 720910, 2, 0, 720911, 2, 0, 720912, 2, 0, 720913, 2, 0, 720914, 2, 0, 720915, 2, 0, 720916, 2, 0, 720917, 2, 0, 720922, 2, 0, 720923, 2, 0, 720924, 2, 0, 720928, 2, 0, 786432, 2, 0, 786464, 2, 0, 851968, 2, 0, 851970, 2, 0, 851971, 2, 0, 851972, 2, 0, 851973, 2, 0, 851974, 2, 0, 851975, 2, 0, 851976, 2, 0, 851977, 2, 0, 851978, 2, 0, 851979, 2, 0, 851980, 2, 0, 851981, 2, 0, 851982, 2, 0, 851983, 2, 0, 851984, 2, 0, 851985, 2, 0, 851986, 2, 0, 851987, 2, 0, 851988, 2, 0, 851989, 2, 0, 851990, 2, 0, 851991, 2, 0, 851992, 2, 0, 851993, 2, 0, 851994, 2, 0, 851995, 2, 0, 851996, 2, 0, 851997, 2, 0, 851998, 2, 0, 852000, 2, 0, 917504, 2, 0, 917536, 2, 0, 983040, 2, 0, 983041, 2, 0, 983042, 2, 0, 983043, 2, 0, 983044, 2, 0, 983045, 2, 0, 983046, 2, 0, 983047, 2, 0, 983048, 2, 0, 983049, 2, 0, 983050, 2, 0, 983051, 2, 0, 983052, 2, 0, 983053, 2, 0, 983054, 2, 0, 983055, 2, 0, 983056, 2, 0, 983057, 2, 0, 983058, 2, 0, 983059, 2, 0, 983060, 2, 0, 983061, 2, 0, 983062, 2, 0, 983063, 2, 0, 983064, 2, 0, 983065, 2, 0, 983066, 2, 0, 983067, 2, 0, 983068, 2, 0, 983069, 2, 0, 983070, 2, 0, 983071, 2, 0, 983072, 2, 0 )
+tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 11, 0, 0, 12, 0, 0, 13, 0, 0, 14, 0, 0, 15, 0, 0, 16, 0, 0, 17, 0, 0, 18, 0, 0, 19, 0, 0, 20, 0, 0, 21, 0, 0, 22, 0, 0, 23, 0, 0, 24, 0, 0, 25, 0, 0, 26, 0, 0, 27, 0, 0, 28, 0, 0, 29, 0, 0, 30, 0, 0, 31, 0, 0, 32, 0, 0, 65536, 0, 0, 65568, 0, 0, 131072, 0, 0, 131074, 0, 0, 131075, 0, 0, 131076, 0, 0, 131077, 0, 0, 131078, 0, 0, 131079, 0, 0, 131080, 0, 0, 131081, 0, 0, 131082, 0, 0, 131083, 0, 0, 131084, 0, 0, 131085, 0, 0, 131086, 0, 0, 131089, 0, 0, 131090, 0, 0, 131091, 0, 0, 131092, 0, 0, 131093, 0, 0, 131094, 0, 0, 131095, 0, 0, 131096, 0, 0, 131097, 0, 0, 131098, 0, 0, 131099, 0, 0, 131100, 0, 0, 131101, 0, 0, 131102, 0, 0, 131104, 0, 0, 196608, 0, 0, 196610, 0, 0, 196638, 0, 0, 196640, 0, 0, 262144, 0, 0, 262146, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 0, 0, 262153, 0, 0, 262154, 0, 0, 262155, 0, 0, 262156, 0, 0, 262157, 0, 0, 262158, 0, 0, 262159, 0, 0, 262160, 0, 0, 262161, 0, 0, 262162, 0, 0, 262163, 0, 0, 262164, 0, 0, 262165, 0, 0, 262166, 0, 0, 262167, 0, 0, 262170, 0, 0, 262171, 0, 0, 262172, 0, 0, 262174, 0, 0, 262176, 0, 0, 327680, 0, 0, 327682, 0, 0, 327684, 0, 0, 327708, 0, 0, 327710, 0, 0, 327712, 0, 0, 393216, 0, 0, 393218, 0, 0, 393220, 0, 0, 393222, 0, 0, 393223, 0, 0, 393224, 0, 0, 393225, 0, 0, 393230, 0, 0, 393231, 0, 0, 393232, 0, 0, 393233, 0, 0, 393234, 0, 0, 393239, 0, 0, 393240, 0, 0, 393241, 0, 0, 393242, 0, 0, 393244, 0, 0, 393246, 0, 0, 393248, 0, 0, 458752, 0, 0, 458756, 0, 0, 458758, 0, 0, 458778, 0, 0, 458780, 0, 0, 458784, 0, 0, 524288, 0, 0, 524292, 0, 0, 524294, 0, 0, 524314, 0, 0, 524316, 0, 0, 524320, 0, 0, 589824, 0, 0, 589826, 0, 0, 589828, 0, 0, 589830, 0, 0, 589831, 0, 0, 589832, 0, 0, 589833, 0, 0, 589838, 0, 0, 589839, 0, 0, 589840, 0, 0, 589841, 0, 0, 589842, 0, 0, 589847, 0, 0, 589848, 0, 0, 589849, 0, 0, 589850, 0, 0, 589852, 0, 0, 589854, 0, 0, 589856, 0, 0, 655360, 0, 0, 655362, 0, 0, 655364, 0, 0, 655388, 0, 0, 655390, 0, 0, 655392, 0, 0, 720896, 0, 0, 720898, 0, 0, 720900, 0, 0, 720901, 0, 0, 720902, 0, 0, 720905, 0, 0, 720906, 0, 0, 720907, 0, 0, 720908, 0, 0, 720909, 0, 0, 720910, 0, 0, 720911, 0, 0, 720912, 0, 0, 720913, 0, 0, 720914, 0, 0, 720915, 0, 0, 720916, 0, 0, 720917, 0, 0, 720918, 0, 0, 720919, 0, 0, 720922, 0, 0, 720923, 0, 0, 720924, 0, 0, 720926, 0, 0, 720928, 0, 0, 786432, 0, 0, 786434, 0, 0, 786462, 0, 0, 786464, 0, 0, 851968, 0, 0, 851970, 0, 0, 851971, 0, 0, 851972, 0, 0, 851973, 0, 0, 851974, 0, 0, 851975, 0, 0, 851976, 0, 0, 851977, 0, 0, 851978, 0, 0, 851979, 0, 0, 851980, 0, 0, 851981, 0, 0, 851982, 0, 0, 851985, 0, 0, 851986, 0, 0, 851987, 0, 0, 851988, 0, 0, 851989, 0, 0, 851990, 0, 0, 851991, 0, 0, 851992, 0, 0, 851993, 0, 0, 851994, 0, 0, 851995, 0, 0, 851996, 0, 0, 851997, 0, 0, 851998, 0, 0, 852000, 0, 0, 917504, 0, 0, 917536, 0, 0, 983040, 0, 0, 983041, 0, 0, 983042, 0, 0, 983043, 0, 0, 983044, 0, 0, 983045, 0, 0, 983046, 0, 0, 983047, 0, 0, 983048, 0, 0, 983049, 0, 0, 983050, 0, 0, 983051, 0, 0, 983052, 0, 0, 983053, 0, 0, 983054, 0, 0, 983055, 0, 0, 983056, 0, 0, 983057, 0, 0, 983058, 0, 0, 983059, 0, 0, 983060, 0, 0, 983061, 0, 0, 983062, 0, 0, 983063, 0, 0, 983064, 0, 0, 983065, 0, 0, 983066, 0, 0, 983067, 0, 0, 983068, 0, 0, 983069, 0, 0, 983070, 0, 0, 983071, 0, 0, 983072, 0, 0 )
 
-[node name="background" type="Sprite" parent="."]
-z_index = -3
-texture = ExtResource( 4 )
-centered = false
+[node name="hud" type="CanvasLayer" parent="."]
+script = ExtResource( 2 )
 
-[node name="orange" type="KinematicBody2D" parent="."]
-editor/display_folded = true
-position = Vector2( 306.187, 169.899 )
-scale = Vector2( 0.6, 0.6 )
-script = ExtResource( 5 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="sprite" type="Sprite" parent="orange"]
-position = Vector2( -0.0603638, -0.207138 )
-scale = Vector2( 0.65, 0.65 )
-texture = ExtResource( 6 )
-
-[node name="timer" type="Timer" parent="orange"]
-autostart = true
-
-[node name="shape" type="CollisionShape2D" parent="orange"]
-position = Vector2( -1.65857, -1.65857 )
-shape = SubResource( 3 )
-
-[node name="aura" type="Area2D" parent="orange"]
-scale = Vector2( 1.22494, 1.25179 )
-
-[node name="shape" type="CollisionShape2D" parent="orange/aura"]
-position = Vector2( -0.182739, -0.365479 )
-shape = SubResource( 4 )
-
-[node name="red" type="KinematicBody2D" parent="."]
-editor/display_folded = true
-position = Vector2( 330.103, 145.769 )
-scale = Vector2( 0.6, 0.6 )
-script = ExtResource( 5 )
-
-[node name="sprite" type="Sprite" parent="red"]
-position = Vector2( -0.0603638, -0.207138 )
-scale = Vector2( 0.65, 0.65 )
-texture = ExtResource( 7 )
-
-[node name="timer" type="Timer" parent="red"]
-autostart = true
-
-[node name="shape" type="CollisionShape2D" parent="red"]
-shape = SubResource( 3 )
-
-[node name="lasers" type="Node2D" parent="red"]
-editor/display_folded = true
-scale = Vector2( 2, 2 )
-
-[node name="down" type="Area2D" parent="red/lasers"]
-position = Vector2( 0.300537, 2.10429 )
-rotation = -0.0017298
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="red/lasers/down"]
-shape = SubResource( 5 )
-
-[node name="up" type="Area2D" parent="red/lasers"]
-position = Vector2( 0.300537, -2.40491 )
-rotation = 3.14244
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="red/lasers/up"]
-shape = SubResource( 5 )
-
-[node name="left" type="Area2D" parent="red/lasers"]
-position = Vector2( 1.95386, -0.150299 )
-rotation = 4.70942
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="red/lasers/left"]
-shape = SubResource( 5 )
-
-[node name="right" type="Area2D" parent="red/lasers"]
-position = Vector2( -2.85577, 0 )
-rotation = 7.83053
-scale = Vector2( 1, 0.999604 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="red/lasers/right"]
-shape = SubResource( 5 )
-
-[node name="aura" type="Area2D" parent="red"]
-position = Vector2( 0.451721, 2.17834 )
-scale = Vector2( 1.22494, 1.25179 )
-
-[node name="shape" type="CollisionShape2D" parent="red/aura"]
-position = Vector2( -0.182739, -0.365479 )
-shape = SubResource( 4 )
-
-[node name="coins" type="Node2D" parent="."]
-editor/display_folded = true
-
-[node name="coin" parent="coins" instance=ExtResource( 8 )]
-position = Vector2( 182.985, 284.67 )
-scale = Vector2( 0.1, 0.1 )
-
-[node name="coin2" parent="coins" instance=ExtResource( 8 )]
-position = Vector2( 197.738, 284.978 )
-scale = Vector2( 0.1, 0.1 )
-
-[node name="coin3" parent="coins" instance=ExtResource( 8 )]
-position = Vector2( 213.72, 284.67 )
-scale = Vector2( 0.1, 0.1 )
-
-[node name="coin4" parent="coins" instance=ExtResource( 8 )]
-position = Vector2( 233.698, 284.978 )
-scale = Vector2( 0.1, 0.1 )
-
-[node name="coin5" parent="coins" instance=ExtResource( 8 )]
-position = Vector2( 255.358, 284.978 )
-scale = Vector2( 0.1, 0.1 )
-
-[node name="coin6" parent="coins" instance=ExtResource( 8 )]
-position = Vector2( 277.921, 284.978 )
-scale = Vector2( 0.1, 0.1 )
-
-[node name="coin7" parent="coins" instance=ExtResource( 8 )]
-position = Vector2( 309.508, 285.88 )
-scale = Vector2( 0.1, 0.1 )
-
-[node name="coin8" parent="coins" instance=ExtResource( 8 )]
-position = Vector2( 309.508, 285.88 )
-scale = Vector2( 0.1, 0.1 )
-
-[node name="coin9" parent="coins" instance=ExtResource( 8 )]
-position = Vector2( 336.579, 284.978 )
-scale = Vector2( 0.1, 0.1 )
-
-[node name="coin10" parent="coins" instance=ExtResource( 8 )]
-position = Vector2( 367.62, 286.831 )
-scale = Vector2( 0.1, 0.1 )
-
-[node name="coin11" parent="coins" instance=ExtResource( 8 )]
-position = Vector2( 390.321, 285.441 )
-scale = Vector2( 0.1, 0.1 )
-
-[node name="coin12" parent="coins" instance=ExtResource( 8 )]
-position = Vector2( 412.559, 285.904 )
-scale = Vector2( 0.1, 0.1 )
-
-[node name="coin13" parent="coins" instance=ExtResource( 8 )]
-position = Vector2( 430, 283.631 )
-scale = Vector2( 0.1, 0.1 )
-
-[node name="coin14" parent="coins" instance=ExtResource( 8 )]
-position = Vector2( 469.38, 288.264 )
-scale = Vector2( 0.1, 0.1 )
-
-[node name="coin15" parent="coins" instance=ExtResource( 8 )]
-position = Vector2( 510.149, 287.801 )
-scale = Vector2( 0.1, 0.1 )
-
-[node name="coin16" parent="coins" instance=ExtResource( 8 )]
-position = Vector2( 540, 286.874 )
-scale = Vector2( 0.1, 0.1 )
-
-[node name="coin17" parent="coins" instance=ExtResource( 8 )]
-position = Vector2( 581.233, 286.874 )
-scale = Vector2( 0.1, 0.1 )
-
-[node name="coin18" parent="coins" instance=ExtResource( 8 )]
-position = Vector2( 581.233, 286.874 )
-scale = Vector2( 0.1, 0.1 )
-
-[node name="coin19" parent="coins" instance=ExtResource( 8 )]
-position = Vector2( 301.452, 149.39 )
-scale = Vector2( 0.1, 0.1 )
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="score" type="Label" parent="CanvasLayer"]
+[node name="score" type="Label" parent="hud"]
 margin_left = 567.361
 margin_top = -0.766296
 margin_right = 607.361
 margin_bottom = 13.2337
 rect_scale = Vector2( 2.32786, 2.69734 )
 text = "000"
-script = SubResource( 6 )
-[connection signal="timeout" from="orange/timer" to="orange" method="_on_timer_timeout"]
-[connection signal="body_entered" from="orange/aura" to="orange" method="_on_aura_body_entered"]
-[connection signal="timeout" from="red/timer" to="red" method="_on_timer_timeout"]
-[connection signal="body_entered" from="red/lasers/down" to="red" method="_on_down_body_entered"]
-[connection signal="body_entered" from="red/lasers/up" to="red" method="_on_up_body_entered"]
-[connection signal="body_entered" from="red/lasers/left" to="red" method="_on_left_body_entered"]
-[connection signal="body_entered" from="red/lasers/right" to="red" method="_on_right_body_entered"]
-[connection signal="body_entered" from="red/aura" to="orange" method="_on_aura_body_entered"]
+
+[node name="life" type="Label" parent="hud"]
+margin_right = 40.0
+margin_bottom = 14.0
+
+[node name="background2" type="Node2D" parent="."]
+
+[node name="sprite" type="Sprite" parent="background2"]
+z_index = -5
+texture = ExtResource( 3 )
+centered = false
+
+[node name="spawnenemy" type="Node2D" parent="."]
+editor/display_folded = true
+position = Vector2( 285.947, 154.848 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="position" type="Position2D" parent="spawnenemy"]
+position = Vector2( 11.2934, -0.513336 )
+
+[node name="position2" type="Position2D" parent="spawnenemy"]
+position = Vector2( 28.7332, -0.698318 )
+
+[node name="position3" type="Position2D" parent="spawnenemy"]
+position = Vector2( 51.0614, -0.513336 )
+
+[node name="timer" type="Timer" parent="spawnenemy"]
+
+[node name="coins" type="Node2D" parent="."]
+
+[node name="giantcoin2" type="Area2D" parent="coins"]
+editor/display_folded = true
+position = Vector2( 608.321, 29.1881 )
+script = ExtResource( 5 )
+
+[node name="giantcoin" type="Sprite" parent="coins/giantcoin2"]
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="coins/giantcoin2"]
+shape = SubResource( 1 )
+
+[node name="giantcoin3" type="Area2D" parent="coins"]
+editor/display_folded = true
+position = Vector2( 611.115, 279.889 )
+script = ExtResource( 5 )
+
+[node name="giantcoin" type="Sprite" parent="coins/giantcoin3"]
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="coins/giantcoin3"]
+shape = SubResource( 1 )
+
+[node name="giantcoin4" type="Area2D" parent="coins"]
+editor/display_folded = true
+position = Vector2( 30, 280 )
+script = ExtResource( 5 )
+
+[node name="giantcoin" type="Sprite" parent="coins/giantcoin4"]
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="coins/giantcoin4"]
+shape = SubResource( 1 )
+
+[node name="giantcoin5" type="Area2D" parent="coins"]
+editor/display_folded = true
+position = Vector2( 49, 153 )
+script = ExtResource( 5 )
+
+[node name="giantcoin" type="Sprite" parent="coins/giantcoin5"]
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="coins/giantcoin5"]
+shape = SubResource( 1 )
+
+[node name="giantcoin6" type="Area2D" parent="coins"]
+editor/display_folded = true
+position = Vector2( 591, 155 )
+script = ExtResource( 5 )
+
+[node name="giantcoin" type="Sprite" parent="coins/giantcoin6"]
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="coins/giantcoin6"]
+shape = SubResource( 1 )
+
+[node name="giantcoin7" type="Area2D" parent="coins"]
+editor/display_folded = true
+position = Vector2( 309, 49 )
+script = ExtResource( 5 )
+
+[node name="giantcoin" type="Sprite" parent="coins/giantcoin7"]
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="coins/giantcoin7"]
+shape = SubResource( 1 )
+
+[node name="giantcoin" type="Area2D" parent="coins"]
+editor/display_folded = true
+position = Vector2( 31.777, 30.1881 )
+script = ExtResource( 5 )
+
+[node name="giantcoin" type="Sprite" parent="coins/giantcoin"]
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="coins/giantcoin"]
+shape = SubResource( 1 )
+
+[node name="spawnplayer" type="Node2D" parent="."]
+position = Vector2( 310, 271 )
+script = ExtResource( 7 )
+
+[node name="position" type="Position2D" parent="spawnplayer"]
+[connection signal="timeout" from="spawnenemy/timer" to="spawnenemy" method="_on_timer_timeout"]
+[connection signal="body_entered" from="coins/giantcoin2" to="coins/giantcoin2" method="_on_giantcoin_body_entered"]
+[connection signal="body_entered" from="coins/giantcoin3" to="coins/giantcoin3" method="_on_giantcoin_body_entered"]
+[connection signal="body_entered" from="coins/giantcoin4" to="coins/giantcoin4" method="_on_giantcoin_body_entered"]
+[connection signal="body_entered" from="coins/giantcoin5" to="coins/giantcoin5" method="_on_giantcoin_body_entered"]
+[connection signal="body_entered" from="coins/giantcoin6" to="coins/giantcoin6" method="_on_giantcoin_body_entered"]
+[connection signal="body_entered" from="coins/giantcoin7" to="coins/giantcoin7" method="_on_giantcoin_body_entered"]
+[connection signal="body_entered" from="coins/giantcoin" to="coins/giantcoin" method="_on_giantcoin_body_entered"]

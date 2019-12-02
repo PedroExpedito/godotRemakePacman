@@ -1,42 +1,44 @@
 [gd_scene load_steps=2 format=2]
 
 [sub_resource type="GDScript" id=1]
-script/source = "extends Button
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = \"text\"
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-
-func _on_Button_pressed():
+script/source = "extends Control
+func _on_play_again_pressed():
+	game.reset_vars()
 	get_tree().change_scene(\"res://src/scene/main.tscn\")
-	pass # Replace with function body.
+	pass
+func _on_quit_pressed():
+	get_tree().quit()
+	pass 
 "
 
 [node name="youwin" type="Node2D"]
 
 [node name="Sprite" type="Sprite" parent="."]
 
-[node name="Label" type="Label" parent="."]
+[node name="Control" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+script = SubResource( 1 )
+
+[node name="Label" type="Label" parent="Control"]
 margin_left = 270.192
 margin_top = 112.283
 margin_right = 361.192
 margin_bottom = 126.283
 text = "Voce venceuw"
 
-[node name="Button" type="Button" parent="Label"]
-margin_left = 12.4965
-margin_top = 24.2579
-margin_right = 82.4965
-margin_bottom = 44.2579
-text = "New Play"
-script = SubResource( 1 )
-[connection signal="pressed" from="Label/Button" to="Label/Button" method="_on_Button_pressed"]
+[node name="play again" type="Button" parent="Control"]
+margin_left = 282.688
+margin_top = 136.541
+margin_right = 352.688
+margin_bottom = 156.541
+text = "Play Again"
+
+[node name="quit" type="Button" parent="Control"]
+margin_left = 297.596
+margin_top = 175.112
+margin_right = 347.596
+margin_bottom = 195.112
+text = "Quit"
+[connection signal="pressed" from="Control/play again" to="Control" method="_on_play_again_pressed"]
+[connection signal="pressed" from="Control/quit" to="Control" method="_on_quit_pressed"]
