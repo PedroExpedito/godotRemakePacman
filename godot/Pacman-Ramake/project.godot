@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Paman-Ramake"
-run/main_scene="res://src/scene/main.tscn"
+run/main_scene="res://src/scene/mainmenu.tscn"
 config/icon="res://icon.png"
 
 [autoload]

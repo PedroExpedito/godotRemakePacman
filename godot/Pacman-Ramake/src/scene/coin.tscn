@@ -14,9 +14,8 @@ func _ready():
 func _on_coin_body_entered(body):
 	if body.has_method(\"player\"):
 		game.game_score += 1
-		print(game.game_score)
+		game.coin += 1
 		queue_free()
-		print(\"destruio\")
 	pass # Replace with function body.
 "
 

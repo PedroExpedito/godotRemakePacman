@@ -28,7 +28,7 @@ func _physics_process(delta):
 		if vulnerable_enemy_time >= 5:
 			vulnerable_enemy = false
 			vulnerable_enemy_time = 0
-	if game_score > 17 and running_game == true:
+	if coin > 141 and running_game == true:
 		running_game = false
 		get_tree().change_scene("res://src/scene/youwin.tscn")
 	if life_player <= 0 and running_game == true:
@@ -55,6 +55,6 @@ func reset_vars():
 	blue_time_spawn = 0
 	red_time_spawn = 0
 	coin = 0
-	spawn = false
+	spawn = true
 	running_game = true
     

@@ -2,7 +2,19 @@ extends KinematicBody2D
 var motion = Vector2()
 var speed = 25000
 var move = true
+func _ready():
+	game.running_game = true
 func _physics_process(delta):
+	get_input(delta)
+	motion = move_and_slide(motion)
+func player():
+	pass
+func kill_me():
+	if game.life_player > 0:
+		game.request_spawn = true
+	game.life_player -= 1
+	self.queue_free()
+func get_input(delta):
 	if Input.is_action_pressed("ui_down") and move == false:
 		motion.y = speed*delta
 		move = true
@@ -23,11 +35,4 @@ func _physics_process(delta):
 	else:
 		move = false
 		motion = Vector2()	
-	motion = move_and_slide(motion)
-func player():
-	pass
-func kill_me():
-	if game.life_player > 0:
-		game.request_spawn = true
-	game.life_player -= 1
-	self.queue_free()
+	

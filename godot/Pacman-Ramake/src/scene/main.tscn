@@ -1,15 +1,23 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/tres/cenario.tres" type="TileSet" id=1]
 [ext_resource path="res://src/scripts/hud.gd" type="Script" id=2]
-[ext_resource path="res://src/texture/backgroundblack.png" type="Texture" id=3]
-[ext_resource path="res://src/scripts/spawnenemy.gd" type="Script" id=4]
-[ext_resource path="res://src/scripts/giantcoin.gd" type="Script" id=5]
-[ext_resource path="res://src/texture/coin.png" type="Texture" id=6]
-[ext_resource path="res://src/scripts/spawnplayer.gd" type="Script" id=7]
+[ext_resource path="res://src/fonte/Freshman.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://src/texture/pacman1.png" type="Texture" id=4]
+[ext_resource path="res://src/texture/whitheblack.png" type="Texture" id=5]
+[ext_resource path="res://src/texture/backgroundblack.png" type="Texture" id=6]
+[ext_resource path="res://src/scripts/spawnenemy.gd" type="Script" id=7]
+[ext_resource path="res://src/scene/giantcoin.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/scene/coin.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/scripts/spawnplayer.gd" type="Script" id=10]
 
-[sub_resource type="CircleShape2D" id=1]
-radius = 5.51962
+[sub_resource type="DynamicFont" id=1]
+size = 20
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 21
+font_data = ExtResource( 3 )
 
 [node name="main" type="Node2D"]
 
@@ -23,28 +31,44 @@ tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 
 script = ExtResource( 2 )
 
 [node name="score" type="Label" parent="hud"]
-margin_left = 567.361
-margin_top = -0.766296
-margin_right = 607.361
-margin_bottom = 13.2337
-rect_scale = Vector2( 2.32786, 2.69734 )
+margin_left = 599.127
+margin_top = 0.0482101
+margin_right = 641.127
+margin_bottom = 21.0482
+rect_scale = Vector2( 0.91598, 1.41918 )
+custom_fonts/font = SubResource( 1 )
 text = "000"
+align = 2
 
 [node name="life" type="Label" parent="hud"]
-margin_right = 40.0
-margin_bottom = 14.0
+margin_left = 26.5369
+margin_top = 8.38007
+margin_right = 66.5369
+margin_bottom = 22.3801
+custom_fonts/font = SubResource( 2 )
+
+[node name="sprite" type="Sprite" parent="hud/life"]
+position = Vector2( -12.5701, 6.28504 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 4 )
+
+[node name="whiteblack" type="Sprite" parent="hud"]
+visible = false
+texture = ExtResource( 5 )
+centered = false
 
 [node name="background2" type="Node2D" parent="."]
 
 [node name="sprite" type="Sprite" parent="background2"]
+position = Vector2( -0.307373, 5.83977 )
 z_index = -5
-texture = ExtResource( 3 )
+texture = ExtResource( 6 )
 centered = false
 
 [node name="spawnenemy" type="Node2D" parent="."]
 editor/display_folded = true
 position = Vector2( 285.947, 154.848 )
-script = ExtResource( 4 )
+script = ExtResource( 7 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -61,101 +85,563 @@ position = Vector2( 51.0614, -0.513336 )
 [node name="timer" type="Timer" parent="spawnenemy"]
 
 [node name="coins" type="Node2D" parent="."]
-
-[node name="giantcoin2" type="Area2D" parent="coins"]
 editor/display_folded = true
-position = Vector2( 608.321, 29.1881 )
-script = ExtResource( 5 )
 
-[node name="giantcoin" type="Sprite" parent="coins/giantcoin2"]
-scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 6 )
+[node name="giantcoin2" parent="coins" instance=ExtResource( 8 )]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="coins/giantcoin2"]
-shape = SubResource( 1 )
+[node name="giantcoin3" parent="coins" instance=ExtResource( 8 )]
+position = Vector2( 310.321, 47.1881 )
 
-[node name="giantcoin3" type="Area2D" parent="coins"]
-editor/display_folded = true
-position = Vector2( 611.115, 279.889 )
-script = ExtResource( 5 )
+[node name="giantcoin4" parent="coins" instance=ExtResource( 8 )]
+position = Vector2( 32.3202, 33.1881 )
 
-[node name="giantcoin" type="Sprite" parent="coins/giantcoin3"]
-scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 6 )
+[node name="giantcoin5" parent="coins" instance=ExtResource( 8 )]
+position = Vector2( 51.3202, 155.188 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="coins/giantcoin3"]
-shape = SubResource( 1 )
+[node name="giantcoin6" parent="coins" instance=ExtResource( 8 )]
+position = Vector2( 30.3202, 279.188 )
 
-[node name="giantcoin4" type="Area2D" parent="coins"]
-editor/display_folded = true
-position = Vector2( 30, 280 )
-script = ExtResource( 5 )
+[node name="giantcoin7" parent="coins" instance=ExtResource( 8 )]
+position = Vector2( 611.321, 279.188 )
 
-[node name="giantcoin" type="Sprite" parent="coins/giantcoin4"]
-scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 6 )
+[node name="giantcoin8" parent="coins" instance=ExtResource( 8 )]
+position = Vector2( 569.321, 239.188 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="coins/giantcoin4"]
-shape = SubResource( 1 )
+[node name="giantcoin9" parent="coins" instance=ExtResource( 8 )]
+position = Vector2( 571.321, 70.1882 )
 
-[node name="giantcoin5" type="Area2D" parent="coins"]
-editor/display_folded = true
-position = Vector2( 49, 153 )
-script = ExtResource( 5 )
+[node name="giantcoin10" parent="coins" instance=ExtResource( 8 )]
+position = Vector2( 488.321, 89.1882 )
 
-[node name="giantcoin" type="Sprite" parent="coins/giantcoin5"]
-scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 6 )
+[node name="giantcoin11" parent="coins" instance=ExtResource( 8 )]
+position = Vector2( 72.3203, 71.1882 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="coins/giantcoin5"]
-shape = SubResource( 1 )
+[node name="giantcoin12" parent="coins" instance=ExtResource( 8 )]
+position = Vector2( 157.32, 85.1882 )
 
-[node name="giantcoin6" type="Area2D" parent="coins"]
-editor/display_folded = true
-position = Vector2( 591, 155 )
-script = ExtResource( 5 )
+[node name="giantcoin13" parent="coins" instance=ExtResource( 8 )]
+position = Vector2( 158.32, 222.188 )
 
-[node name="giantcoin" type="Sprite" parent="coins/giantcoin6"]
-scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 6 )
+[node name="giantcoin14" parent="coins" instance=ExtResource( 8 )]
+position = Vector2( 488.321, 225.188 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="coins/giantcoin6"]
-shape = SubResource( 1 )
+[node name="giantcoin15" parent="coins" instance=ExtResource( 8 )]
+position = Vector2( 161.32, 155.188 )
 
-[node name="giantcoin7" type="Area2D" parent="coins"]
-editor/display_folded = true
-position = Vector2( 309, 49 )
-script = ExtResource( 5 )
+[node name="giantcoin16" parent="coins" instance=ExtResource( 8 )]
+position = Vector2( 483.321, 154.188 )
 
-[node name="giantcoin" type="Sprite" parent="coins/giantcoin7"]
-scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 6 )
+[node name="giantcoin17" parent="coins" instance=ExtResource( 8 )]
+position = Vector2( 483.321, 154.188 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="coins/giantcoin7"]
-shape = SubResource( 1 )
+[node name="giantcoin18" parent="coins" instance=ExtResource( 8 )]
+position = Vector2( 72.3204, 238.188 )
 
-[node name="giantcoin" type="Area2D" parent="coins"]
-editor/display_folded = true
-position = Vector2( 31.777, 30.1881 )
-script = ExtResource( 5 )
+[node name="normalcoin" type="Node2D" parent="coins"]
 
-[node name="giantcoin" type="Sprite" parent="coins/giantcoin"]
-scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 6 )
+[node name="coin" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 59.7932, 30.8141 )
+scale = Vector2( 0.1, 0.1 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="coins/giantcoin"]
-shape = SubResource( 1 )
+[node name="coin2" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 79.8684, 30.8141 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin3" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 99.5851, 31.1726 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin4" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 119.66, 30.8141 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin5" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 140.094, 30.8141 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin6" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 160.122, 30.5506 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin7" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 180.149, 30.287 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin8" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 199.928, 30.0831 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin9" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 219.911, 30.287 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin10" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 240.098, 29.8792 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin11" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 260.081, 29.8792 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin12" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 280.033, 30.6541 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin13" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 299.791, 30.6541 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin14" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 320, 30.5506 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin15" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 339.759, 30.7443 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin16" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 360.098, 30.5506 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin17" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 380.632, 30.5506 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin18" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 400.003, 30.3569 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin19" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 420.149, 30.3569 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin20" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 440.101, 30.3569 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin21" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 460.247, 30.3569 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin22" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 480.393, 30.5506 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin23" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 499.958, 30.1631 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin24" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 519.91, 30.5506 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin25" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 540.106, 30.0772 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin26" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 559.986, 30.3928 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin27" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 579.866, 30.235 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin28" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 610.16, 50.1152 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin29" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 610.16, 70.7081 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin30" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 610.16, 70.7081 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin31" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 609.945, 90.3497 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin32" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 610.374, 110.526 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin33" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 609.945, 130.058 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin34" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 609.945, 150.234 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin35" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 610.16, 170.195 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin36" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 610.16, 189.727 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin37" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 609.945, 209.689 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin38" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 610.16, 230.294 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin39" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 609.945, 250.255 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin40" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 590.199, 280.519 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin41" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 570.023, 280.304 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin42" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 549.632, 280.519 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin43" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 530, 280.519 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin44" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 510.139, 281.313 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin45" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 490.279, 280.916 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin46" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 470.021, 281.313 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin47" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 449.763, 281.313 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin48" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 429.505, 280.519 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin49" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 410.041, 280.916 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin50" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 390.181, 281.313 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin51" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 369.923, 281.313 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin52" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 350.459, 281.313 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin53" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 329.804, 281.313 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin54" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 309.944, 282.108 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin55" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 289.288, 280.916 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin56" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 269.825, 280.916 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin57" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 250.361, 280.916 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin58" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 229.309, 280.122 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin59" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 209.846, 280.122 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin60" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 189.588, 280.519 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin61" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 169.727, 280.916 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin62" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 150.264, 280.916 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin63" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 130.006, 280.519 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin64" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 109.748, 280.519 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin65" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 89.8872, 280.519 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin66" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 69.6293, 280.519 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin67" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 49.7687, 280.916 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin68" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 29.908, 261.056 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin69" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 29.908, 240.349 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin70" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 29.908, 220.29 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin71" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 29.908, 200.555 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin72" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 29.908, 180.496 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin73" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 29.908, 161.084 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin74" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 29.908, 140.701 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin75" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 29.5845, 120.966 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin76" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 29.908, 100.907 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin77" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 30, 80 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin78" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 30, 80 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin79" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 29.6415, 61.0003 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin80" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 29.6415, 61.0003 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin81" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 100.86, 68.5633 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin82" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 100.86, 68.5633 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin83" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 129.599, 70.3595 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin84" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 159.536, 70.3595 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin85" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 190.671, 70.3595 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin86" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 220.009, 69.162 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin87" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 70, 90.3497 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin88" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 70, 111.306 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin89" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 70, 138.848 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin90" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 70.5987, 162.797 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin91" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 69.4012, 190.339 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin92" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 69.4012, 217.09 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin93" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 100.536, 242.237 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin94" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 130.472, 241.638 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin95" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 160.047, 241.162 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin96" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 189.084, 241.162 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin97" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 219.914, 241.879 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin98" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 250.027, 241.162 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin99" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 279.064, 241.52 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin100" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 309.536, 241.162 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin101" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 340.366, 241.162 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin102" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 369.044, 241.52 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin103" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 399.157, 241.162 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin104" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 429.505, 241.52 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin105" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 459.976, 241.52 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin106" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 490.089, 241.52 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin107" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 516.259, 241.52 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin108" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 540, 241.52 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin109" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 571.547, 211.049 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin110" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 571.547, 173.395 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin111" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 571.547, 145.792 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin112" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 571.547, 117.766 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin113" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 571.547, 91.238 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin114" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 551.429, 68.0245 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin115" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 522.799, 68.0245 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin116" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 492.621, 67.2508 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin117" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 468.634, 67.2508 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin118" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 435.361, 66.477 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin119" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 402.357, 68.0245 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin120" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 373.727, 68.0245 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin121" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 337.166, 68.5633 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin122" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 306.988, 69.3371 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin123" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 270.62, 69.3371 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin124" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 249.728, 68.5633 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="coin125" parent="coins/normalcoin" instance=ExtResource( 9 )]
+position = Vector2( 249.728, 68.5633 )
+scale = Vector2( 0.1, 0.1 )
 
 [node name="spawnplayer" type="Node2D" parent="."]
 position = Vector2( 310, 271 )
-script = ExtResource( 7 )
+script = ExtResource( 10 )
 
 [node name="position" type="Position2D" parent="spawnplayer"]
 [connection signal="timeout" from="spawnenemy/timer" to="spawnenemy" method="_on_timer_timeout"]
-[connection signal="body_entered" from="coins/giantcoin2" to="coins/giantcoin2" method="_on_giantcoin_body_entered"]
-[connection signal="body_entered" from="coins/giantcoin3" to="coins/giantcoin3" method="_on_giantcoin_body_entered"]
-[connection signal="body_entered" from="coins/giantcoin4" to="coins/giantcoin4" method="_on_giantcoin_body_entered"]
-[connection signal="body_entered" from="coins/giantcoin5" to="coins/giantcoin5" method="_on_giantcoin_body_entered"]
-[connection signal="body_entered" from="coins/giantcoin6" to="coins/giantcoin6" method="_on_giantcoin_body_entered"]
-[connection signal="body_entered" from="coins/giantcoin7" to="coins/giantcoin7" method="_on_giantcoin_body_entered"]
-[connection signal="body_entered" from="coins/giantcoin" to="coins/giantcoin" method="_on_giantcoin_body_entered"]

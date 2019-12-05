@@ -62,11 +62,13 @@ func _on_right_body_entered(body):#riht
 func _on_aura_body_entered(body):
 	if body.has_method("player"):
 		if game.vulnerable_enemy == false:
+			game.running_game = false
 			body.kill_me()
 		
 		else:
 			if body.has_method("player"):
 				self.queue_free()
+				game.game_score += 10
 				if self.name_enemy == "orange":
 					game.orange_alive_enemy = false
 				elif self.name_enemy == "blue":
