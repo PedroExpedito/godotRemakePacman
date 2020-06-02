@@ -5,3 +5,7 @@ ser fiel a sua inteligencia artificial usando apenas ferramentas open source com
 com o software livre.
 
 
+
+![Game](https://raw.githubusercontent.com/PedroExpedito/godotRemakePacman/master/images/game.png)
+
+Assista tutoriais do game no youtube [Minha PlayList](https://www.youtube.com/watch?v=fm7lOMHTZdI&list=PLNQbH5QFtkDGxRDeVSYAUrIjqJtIccaAq)
